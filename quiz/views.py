@@ -8,5 +8,8 @@ def home(request):
 def answerquiz(request):
     return render(request, 'quiz/answerquiz.html')
 
-def answerquiz(request):
+def makequiz(request):
     return render(request, 'quiz/makequiz.html')
+
+def login(request):
+    return render(request, 'quiz/login.html')

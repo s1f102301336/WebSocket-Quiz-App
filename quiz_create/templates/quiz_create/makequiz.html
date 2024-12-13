@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>クイズ投稿ページ</title>
+  </head>
+  <body>
+    <h1>クイズ投稿ページ</h1>
+
+    <form action="/submit-quiz" method="post">
+      <!-- 本文入力 -->
+      <h3>本文を記入してください</h3>
+      <textarea
+        name="question"
+        rows="5"
+        cols="40"
+        placeholder="クイズの本文を入力してください"
+      ></textarea>
+
+      <!-- 選択肢入力 -->
+      <h3>クイズの選択肢を記入してください</h3>
+      <textarea
+        name="correct_option"
+        rows="1"
+        cols="15"
+        placeholder="正解の選択肢"
+      ></textarea>
+      <textarea
+        name="wrong_option1"
+        rows="1"
+        cols="15"
+        placeholder="不正解の選択肢1"
+      ></textarea>
+      <textarea
+        name="wrong_option2"
+        rows="1"
+        cols="15"
+        placeholder="不正解の選択肢2"
+      ></textarea>
+      <textarea
+        name="wrong_option3"
+        rows="1"
+        cols="15"
+        placeholder="不正解の選択肢3"
+      ></textarea>
+
+      <!-- 解説 -->
+      <h3>クイズの解説があれば記入してください</h3>
+      <textarea
+        name="explanation"
+        rows="5"
+        cols="40"
+        placeholder="問題の解説"
+      ></textarea>
+
+      <!-- ジャンル選択 -->
+      <h3>クイズのジャンルを選択してください</h3>
+      <div>
+        <input type="checkbox" id="genre1" name="genres" value="science" />
+        <label for="genre1">科学</label>
+      </div>
+      <div>
+        <input type="checkbox" id="genre2" name="genres" value="history" />
+        <label for="genre2">歴史</label>
+      </div>
+      <div>
+        <input type="checkbox" id="genre3" name="genres" value="sports" />
+        <label for="genre3">スポーツ</label>
+      </div>
+      <div>
+        <input type="checkbox" id="genre4" name="genres" value="math" />
+        <label for="genre4">数学</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          id="genre5"
+          name="genres"
+          value="entertainment"
+        />
+        <label for="genre5">お笑い</label>
+      </div>
+      <div>
+        <input type="checkbox" id="genre6" name="genres" value="games" />
+        <label for="genre6">ゲーム</label>
+      </div>
+      <div>
+        <input type="checkbox" id="genre7" name="genres" value="education" />
+        <label for="genre7">義務教育</label>
+      </div>
+      <div>
+        <input type="checkbox" id="genre8" name="genres" value="other" />
+        <label for="genre8">その他</label>
+      </div>
+      <br />
+
+      <!-- 送信ボタン -->
+      <button type="submit">投稿する</button>
+    </form>
+  </body>
+</html>
