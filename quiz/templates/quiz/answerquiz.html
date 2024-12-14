@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>クイズ回答</h1>
+    <button><a href="{% url 'home' %}">ホームへ戻る</a></button>
     <h2>問題文</h2>
     <h4>ここに問題文が出ます</h4>
     <h2>回答</h2>
     <h4>ここに四つ選択肢がランダムでシャッフルされた順番で表示されます</h4>
-    <h4>回答後、この場所に正解か不正解かと、説明されていたら説明文が表示されます</h4>
-</body>
+    <h4>
+      回答後、この場所に正解か不正解かと、説明されていたら説明文が表示されます
+    </h4>
+  </body>
 </html>
