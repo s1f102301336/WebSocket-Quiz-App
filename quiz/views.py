@@ -1,15 +1,17 @@
 from django.shortcuts import render
+from django.http import Http404
+from quiz_create.models import Quiz
 
 # Create your views here.
 
-def home(request):
-    return render(request, 'quiz/home.html')
+def answerquiz(request, quiz_id):
 
-def answerquiz(request):
-    return render(request, 'quiz/answerquiz.html')
-
-def makequiz(request):
-    return render(request, 'quiz/makequiz.html')
-
-def login(request):
-    return render(request, 'quiz/login.html')
+    try:
+        quiz = Quiz.objects.get(pk=quiz_id)
+        
+    except Quiz.DoesNotExist:
+        raise Http404("Quiz does not exist")
+    data={
+        'quiz':quiz
+    }
+    return render(request, 'quiz/answerquiz.html', data)

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,12 +8,21 @@
   <body>
     <h1>クイズ回答</h1>
     <button><a href="{% url 'home' %}">ホームへ戻る</a></button>
-    <h2>問題文</h2>
-    <h4>ここに問題文が出ます</h4>
+    <p>{{quiz.category}}</p>
+    <h1>{{quiz.title}}</h1>
+    <p>{{quiz.description}}</p>
+    <h2>問題：</h2>
+    <h4>{{quiz.content}}</h4>
     <h2>回答</h2>
     <h4>ここに四つ選択肢がランダムでシャッフルされた順番で表示されます</h4>
+    <button>{{quiz.correct_answer}}</button>
+    <button>{{quiz.incorrect1}}</button>
+    <button>{{quiz.incorrect2}}</button>
+    <button>{{quiz.incorrect3}}</button>
+
     <h4>
       回答後、この場所に正解か不正解かと、説明されていたら説明文が表示されます
     </h4>
+    <p>解説：{{quiz.explanation}}</p>
   </body>
 </html>

@@ -30,21 +30,16 @@
         <div></div>
       </div>
       <div class="contents">
+        {% for quiz in quiz_result %}
         <div class="content" style="border: 1px solid black">
-          <div class="option">Option</div>
-          <div class="title">Title</div>
-          <div class="content">Content</div>
+          <div class="option">{{ quiz.category }}</div>
+          <div class="title">{{ quiz.title }}</div>
+          <div class="description">{{ quiz.description }}</div>
+          <button>
+            <a href="{% url 'answerquiz' quiz.id %}">入室</a>
+          </button>
         </div>
-        <div class="content" style="border: 1px solid black">
-          <div class="option">Option</div>
-          <div class="title">Title</div>
-          <div class="content">Content</div>
-        </div>
-        <div class="content" style="border: 1px solid black">
-          <div class="option">Option</div>
-          <div class="title">Title</div>
-          <div class="content">Content</div>
-        </div>
+        {% endfor %}
       </div>
 
       <footer class="footer"></footer>

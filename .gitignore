@@ -1,6 +1,6 @@
 venv/
 *.log
 *.pyc
-__pycache__/
+**/__pycache__/**
 db-volumes/
 db.sqlite3

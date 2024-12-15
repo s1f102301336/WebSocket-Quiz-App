@@ -55,13 +55,22 @@
           <label for="genre8">その他</label>
         </div>
 
-        <!-- 選択肢入力 -->
+        <!-- タイトル入力 -->
         <h3>タイトルを記入してください</h3>
         <textarea
           name="title"
           rows="1"
           cols="15"
           placeholder="タイトル"
+        ></textarea>
+
+        <!-- 簡単な説明入力 -->
+        <h3>簡単な説明を記入してください</h3>
+        <textarea
+          name="description"
+          rows="1"
+          cols="15"
+          placeholder="簡単な説明"
         ></textarea>
 
         <!-- 本文入力 -->
@@ -114,18 +123,6 @@
         <!-- 送信ボタン -->
         <button type="submit">投稿する</button>
       </form>
-
-      <h2>仮表示</h2>
-      {% for quiz in quiz_result %}
-      <p>{{quiz.category}}</p>
-      <p>{{quiz.title}}</p>
-      <p>{{quiz.content}}</p>
-      <p>{{quiz.correct_answer}}</p>
-      <p>{{quiz.incorrect1}}</p>
-      <p>{{quiz.incorrect2}}</p>
-      <p>{{quiz.incorrect3}}</p>
-      <p>{{quiz.explanation}}</p>
-      {% endfor %}
     </div>
   </body>
 </html>

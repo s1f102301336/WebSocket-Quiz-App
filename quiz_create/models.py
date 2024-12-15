@@ -20,10 +20,11 @@ class Quiz(models.Model):
         default=Category.OTHER,
     )
     title = models.CharField(max_length=30)
+    description = models.TextField(null=True, blank=True)
     content = models.TextField()
     correct_answer = models.CharField(max_length=20)
     incorrect1 = models.CharField(max_length=20)
     incorrect2 = models.CharField(max_length=20)
     incorrect3 = models.CharField(max_length=20)
-    explanation = models.TextField(max_length=50)
+    explanation = models.TextField(null=True, blank=True)
 
