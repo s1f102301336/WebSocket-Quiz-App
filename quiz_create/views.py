@@ -11,7 +11,7 @@ def makequiz(request):
     print(request)
     print(request.POST)
     if request.method == 'POST':
-        category = (request.POST["category"]).upper()
+        category = request.POST["category"]
         title = request.POST["title"]
         content = request.POST["content"]
         correct_answer = request.POST["correct_answer"]

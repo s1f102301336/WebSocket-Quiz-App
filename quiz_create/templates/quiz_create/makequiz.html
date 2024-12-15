@@ -3,119 +3,129 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
     <title>クイズ投稿ページ</title>
   </head>
   <body>
-    <h1>クイズ投稿ページ</h1>
-    <button><a href="{% url 'home' %}">ホームへ戻る</a></button>
-
-    <form action="{% url 'makequiz' %}" method="POST" name="form">
-      {% csrf_token %}
-      <!-- ジャンル選択 -->
-      <h3>クイズのジャンルを選択してください</h3>
-      <div>
-        <input type="checkbox" id="genre1" name="category" value="Science" />
-        <label for="genre1">科学</label>
-      </div>
-      <div>
-        <input type="checkbox" id="genre2" name="category" value="History" />
-        <label for="genre2">歴史</label>
-      </div>
-      <div>
-        <input type="checkbox" id="genre3" name="category" value="Sports" />
-        <label for="genre3">スポーツ</label>
-      </div>
-      <div>
-        <input type="checkbox" id="genre4" name="category" value="Math" />
-        <label for="genre4">数学</label>
-      </div>
-      <div>
-        <input type="checkbox" id="genre5" name="category" value="Comedy" />
-        <label for="genre5">お笑い</label>
-      </div>
-      <div>
-        <input type="checkbox" id="genre6" name="category" value="Games" />
-        <label for="genre6">ゲーム</label>
-      </div>
-      <div>
-        <input type="checkbox" id="genre7" name="category" value="Education" />
-        <label for="genre7">義務教育</label>
-      </div>
-      <div>
-        <input type="checkbox" id="genre8" name="category" value="Other" />
-        <label for="genre8">その他</label>
+    <div class="container">
+      <div class="header">
+        <h1>クイズ投稿ページ</h1>
+        <button><a href="{% url 'home' %}">ホームへ戻る</a></button>
       </div>
 
-      <!-- 選択肢入力 -->
-      <h3>タイトルを記入してください</h3>
-      <textarea
-        name="title"
-        rows="1"
-        cols="15"
-        placeholder="タイトル"
-      ></textarea>
+      <form action="{% url 'makequiz' %}" method="POST" name="form">
+        {% csrf_token %}
+        <!-- ジャンル選択 -->
+        <h3>クイズのジャンルを選択してください</h3>
+        <div>
+          <input type="checkbox" id="genre1" name="category" value="SCI" />
+          <label for="genre1">科学</label>
+        </div>
+        <div>
+          <input type="checkbox" id="genre2" name="category" value="HIS" />
+          <label for="genre2">歴史</label>
+        </div>
+        <div>
+          <input type="checkbox" id="genre3" name="category" value="SPT" />
+          <label for="genre3">スポーツ</label>
+        </div>
+        <div>
+          <input type="checkbox" id="genre4" name="category" value="MTH" />
+          <label for="genre4">数学</label>
+        </div>
+        <div>
+          <input type="checkbox" id="genre5" name="category" value="CMD" />
+          <label for="genre5">お笑い</label>
+        </div>
+        <div>
+          <input type="checkbox" id="genre6" name="category" value="GMS" />
+          <label for="genre6">ゲーム</label>
+        </div>
+        <div>
+          <input type="checkbox" id="genre7" name="category" value="EDU" />
+          <label for="genre7">義務教育</label>
+        </div>
+        <div>
+          <input type="checkbox" id="genre8" name="category" value="OTH" />
+          <label for="genre8">その他</label>
+        </div>
 
-      <!-- 本文入力 -->
-      <h3>本文を記入してください</h3>
-      <textarea
-        name="content"
-        rows="5"
-        cols="40"
-        placeholder="クイズの本文を入力してください"
-      ></textarea>
+        <!-- 選択肢入力 -->
+        <h3>タイトルを記入してください</h3>
+        <textarea
+          name="title"
+          rows="1"
+          cols="15"
+          placeholder="タイトル"
+        ></textarea>
 
-      <!-- 選択肢入力 -->
-      <h3>クイズの選択肢を記入してください</h3>
-      <textarea
-        name="correct_answer"
-        rows="1"
-        cols="15"
-        placeholder="正解の選択肢"
-      ></textarea>
-      <textarea
-        name="incorrect1"
-        rows="1"
-        cols="15"
-        placeholder="不正解の選択肢1"
-      ></textarea>
-      <textarea
-        name="incorrect2"
-        rows="1"
-        cols="15"
-        placeholder="不正解の選択肢2"
-      ></textarea>
-      <textarea
-        name="incorrect3"
-        rows="1"
-        cols="15"
-        placeholder="不正解の選択肢3"
-      ></textarea>
+        <!-- 本文入力 -->
+        <h3>本文を記入してください</h3>
+        <textarea
+          name="content"
+          rows="5"
+          cols="40"
+          placeholder="クイズの本文を入力してください"
+        ></textarea>
 
-      <!-- 解説 -->
-      <h3>クイズの解説があれば記入してください</h3>
-      <textarea
-        name="explanation"
-        rows="5"
-        cols="40"
-        placeholder="問題の解説"
-      ></textarea>
+        <!-- 選択肢入力 -->
+        <h3>クイズの選択肢を記入してください</h3>
+        <textarea
+          name="correct_answer"
+          rows="1"
+          cols="15"
+          placeholder="正解の選択肢"
+        ></textarea>
+        <textarea
+          name="incorrect1"
+          rows="1"
+          cols="15"
+          placeholder="不正解の選択肢1"
+        ></textarea>
+        <textarea
+          name="incorrect2"
+          rows="1"
+          cols="15"
+          placeholder="不正解の選択肢2"
+        ></textarea>
+        <textarea
+          name="incorrect3"
+          rows="1"
+          cols="15"
+          placeholder="不正解の選択肢3"
+        ></textarea>
 
-      <br />
+        <!-- 解説 -->
+        <h3>クイズの解説があれば記入してください</h3>
+        <textarea
+          name="explanation"
+          rows="5"
+          cols="40"
+          placeholder="問題の解説"
+        ></textarea>
 
-      <!-- 送信ボタン -->
-      <button type="submit">投稿する</button>
-    </form>
+        <br />
 
-    <h2>仮表示</h2>
-    {% for quiz in quiz_result %}
-    <p>{{quiz.category}}</p>
-    <p>{{quiz.title}}</p>
-    <p>{{quiz.content}}</p>
-    <p>{{quiz.correct_answer}}</p>
-    <p>{{quiz.incorrect1}}</p>
-    <p>{{quiz.incorrect2}}</p>
-    <p>{{quiz.incorrect3}}</p>
-    <p>{{quiz.explanation}}</p>
-    {% endfor %}
+        <!-- 送信ボタン -->
+        <button type="submit">投稿する</button>
+      </form>
+
+      <h2>仮表示</h2>
+      {% for quiz in quiz_result %}
+      <p>{{quiz.category}}</p>
+      <p>{{quiz.title}}</p>
+      <p>{{quiz.content}}</p>
+      <p>{{quiz.correct_answer}}</p>
+      <p>{{quiz.incorrect1}}</p>
+      <p>{{quiz.incorrect2}}</p>
+      <p>{{quiz.incorrect3}}</p>
+      <p>{{quiz.explanation}}</p>
+      {% endfor %}
+    </div>
   </body>
 </html>
