@@ -9,11 +9,56 @@
     <h1>クイズ投稿ページ</h1>
     <button><a href="{% url 'home' %}">ホームへ戻る</a></button>
 
-    <form action="/submit-quiz" method="post">
+    <form action="{% url 'makequiz' %}" method="POST" name="form">
+      {% csrf_token %}
+      <!-- ジャンル選択 -->
+      <h3>クイズのジャンルを選択してください</h3>
+      <div>
+        <input type="checkbox" id="genre1" name="category" value="Science" />
+        <label for="genre1">科学</label>
+      </div>
+      <div>
+        <input type="checkbox" id="genre2" name="category" value="History" />
+        <label for="genre2">歴史</label>
+      </div>
+      <div>
+        <input type="checkbox" id="genre3" name="category" value="Sports" />
+        <label for="genre3">スポーツ</label>
+      </div>
+      <div>
+        <input type="checkbox" id="genre4" name="category" value="Math" />
+        <label for="genre4">数学</label>
+      </div>
+      <div>
+        <input type="checkbox" id="genre5" name="category" value="Comedy" />
+        <label for="genre5">お笑い</label>
+      </div>
+      <div>
+        <input type="checkbox" id="genre6" name="category" value="Games" />
+        <label for="genre6">ゲーム</label>
+      </div>
+      <div>
+        <input type="checkbox" id="genre7" name="category" value="Education" />
+        <label for="genre7">義務教育</label>
+      </div>
+      <div>
+        <input type="checkbox" id="genre8" name="category" value="Other" />
+        <label for="genre8">その他</label>
+      </div>
+
+      <!-- 選択肢入力 -->
+      <h3>タイトルを記入してください</h3>
+      <textarea
+        name="title"
+        rows="1"
+        cols="15"
+        placeholder="タイトル"
+      ></textarea>
+
       <!-- 本文入力 -->
       <h3>本文を記入してください</h3>
       <textarea
-        name="question"
+        name="content"
         rows="5"
         cols="40"
         placeholder="クイズの本文を入力してください"
@@ -22,25 +67,25 @@
       <!-- 選択肢入力 -->
       <h3>クイズの選択肢を記入してください</h3>
       <textarea
-        name="correct_option"
+        name="correct_answer"
         rows="1"
         cols="15"
         placeholder="正解の選択肢"
       ></textarea>
       <textarea
-        name="wrong_option1"
+        name="incorrect1"
         rows="1"
         cols="15"
         placeholder="不正解の選択肢1"
       ></textarea>
       <textarea
-        name="wrong_option2"
+        name="incorrect2"
         rows="1"
         cols="15"
         placeholder="不正解の選択肢2"
       ></textarea>
       <textarea
-        name="wrong_option3"
+        name="incorrect3"
         rows="1"
         cols="15"
         placeholder="不正解の選択肢3"
@@ -55,49 +100,22 @@
         placeholder="問題の解説"
       ></textarea>
 
-      <!-- ジャンル選択 -->
-      <h3>クイズのジャンルを選択してください</h3>
-      <div>
-        <input type="checkbox" id="genre1" name="genres" value="science" />
-        <label for="genre1">科学</label>
-      </div>
-      <div>
-        <input type="checkbox" id="genre2" name="genres" value="history" />
-        <label for="genre2">歴史</label>
-      </div>
-      <div>
-        <input type="checkbox" id="genre3" name="genres" value="sports" />
-        <label for="genre3">スポーツ</label>
-      </div>
-      <div>
-        <input type="checkbox" id="genre4" name="genres" value="math" />
-        <label for="genre4">数学</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          id="genre5"
-          name="genres"
-          value="entertainment"
-        />
-        <label for="genre5">お笑い</label>
-      </div>
-      <div>
-        <input type="checkbox" id="genre6" name="genres" value="games" />
-        <label for="genre6">ゲーム</label>
-      </div>
-      <div>
-        <input type="checkbox" id="genre7" name="genres" value="education" />
-        <label for="genre7">義務教育</label>
-      </div>
-      <div>
-        <input type="checkbox" id="genre8" name="genres" value="other" />
-        <label for="genre8">その他</label>
-      </div>
       <br />
 
       <!-- 送信ボタン -->
       <button type="submit">投稿する</button>
     </form>
+
+    <h2>仮表示</h2>
+    {% for quiz in quiz_result %}
+    <p>{{quiz.category}}</p>
+    <p>{{quiz.title}}</p>
+    <p>{{quiz.content}}</p>
+    <p>{{quiz.correct_answer}}</p>
+    <p>{{quiz.incorrect1}}</p>
+    <p>{{quiz.incorrect2}}</p>
+    <p>{{quiz.incorrect3}}</p>
+    <p>{{quiz.explanation}}</p>
+    {% endfor %}
   </body>
 </html>
