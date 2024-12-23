@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'quiz/css/quiz.css' %}" />
     <title>Document</title>
   </head>
   <body>
@@ -17,14 +19,17 @@
     <h4>{{quiz.content}}</h4>
     <h2>回答</h2>
     <h4>ここに四つ選択肢がランダムでシャッフルされた順番で表示されます</h4>
-    <button>{{quiz.correct_answer}}</button>
-    <button>{{quiz.incorrect1}}</button>
-    <button>{{quiz.incorrect2}}</button>
-    <button>{{quiz.incorrect3}}</button>
+    <button id="correct_answer">{{quiz.correct_answer}}</button>
+    <button id="incorrect1">{{quiz.incorrect1}}</button>
+    <button id="incorrect2">{{quiz.incorrect2}}</button>
+    <button id="incorrect3">{{quiz.incorrect3}}</button>
 
-    <h4>
-      回答後、この場所に正解か不正解かと、説明されていたら説明文が表示されます
-    </h4>
-    <p>解説：{{quiz.explanation}}</p>
+    <h4 id="result"></h4>
+    <p>解説</p>
+    <p id="explanation" class="hidden">{{quiz.explanation}}</p>
+    <script
+      type="text/javascript"
+      src="{% static 'quiz/js/quiz.js' %}"
+    ></script>
   </body>
 </html>
