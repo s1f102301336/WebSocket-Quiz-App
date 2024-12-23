@@ -6,6 +6,8 @@
     <title>Document</title>
   </head>
   <body>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'quiz/css/quiz.css' %}">
     <h1>クイズ回答</h1>
     <button><a href="{% url 'home' %}">ホームへ戻る</a></button>
     <p>{{quiz.category}}</p>

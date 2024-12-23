@@ -1,0 +1,160 @@
+/* quiz_create.css */
+
+/* 全体のスタイル */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #eee8e8;
+}
+
+/* コンテナのスタイル */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ヘッダーのスタイル */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-bottom: 3px solid #0056b3;
+}
+
+.header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.header select,
+.header input,
+.header button {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.header select,
+.header input {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.header button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: white;
+  color: #007bff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.header button a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.header button:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+.header button a:hover {
+  color: white;
+}
+
+/* サイドバーのスタイル */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-right: 2px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.sidebar div {
+  height: 50px;
+  margin-bottom: 10px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+}
+
+/* コンテンツエリアのスタイル */
+.contents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.content {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  width: calc(33.333% - 20px);
+  box-shadow: 0px 2px 4px rgba(235, 229, 229, 0.908);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 4px 8px rgba(247, 233, 233, 0.884);
+}
+
+.content .option {
+  font-size: 14px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.content .title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.content .description {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.content button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.content button a {
+  text-decoration: none;
+  color: white;
+}
+
+.content button:hover {
+  background-color: #0056b3;
+}
+
+/* フッターのスタイル */
+.footer {
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: auto;
+  border-top: 3px solid #0056b3;
+}

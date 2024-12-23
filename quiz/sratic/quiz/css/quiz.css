@@ -1,0 +1,114 @@
+/* 全体のスタイル */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #6E93F7, #9BDAF3);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  h1, h2, h4, p {
+    text-align: center;
+    margin: 10px 0;
+  }
+  
+  button {
+    background: #705CF6;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+    transition: transform 0.2s, background 0.3s;
+  }
+  
+  button:hover {
+    background: #8D75FF;
+    transform: scale(1.05);
+  }
+  
+  button a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  /* クイズコンテンツスタイル */
+  .quiz-container {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: #333;
+    max-width: 400px;
+    width: 90%;
+    margin: 20px;
+  }
+  
+  .quiz-container h1 {
+    font-size: 24px;
+    color: #705CF6;
+  }
+  
+  .quiz-container p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .quiz-container button {
+    width: 100%;
+    margin: 5px 0;
+    padding: 15px;
+    background: #EFEFFF;
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+    display: block;
+  }
+  
+  .quiz-container button:hover {
+    background: #D6DAFF;
+  }
+  
+  .quiz-container .correct {
+    background: #DFF6DD !important;
+    color: #317A31;
+  }
+  
+  .quiz-container .incorrect {
+    background: #FDD6D6 !important;
+    color: #A33131;
+  }
+  
+  /* 解説セクション */
+  .quiz-container .explanation {
+    background: #F5F5F5;
+    border-left: 5px solid #705CF6;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    color: #333;
+  }
+  
+  /* レスポンシブデザイン */
+  @media (max-width: 768px) {
+    body {
+      padding: 10px;
+    }
+  
+    .quiz-container {
+      padding: 20px;
+    }
+  
+    button {
+      font-size: 14px;
+    }
+  }
+  
