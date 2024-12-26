@@ -27,9 +27,11 @@
     <h4 id="result"></h4>
     <p>解説</p>
     <p id="explanation" class="hidden">{{quiz.explanation}}</p>
+    {{ quiz_name|json_script:"quiz_name" }}
     <script
       type="text/javascript"
       src="{% static 'quiz/js/quiz.js' %}"
     ></script>
+    <script type="text/javascript" src="{% static 'quiz/js/ws.js' %}"></script>
   </body>
 </html>
