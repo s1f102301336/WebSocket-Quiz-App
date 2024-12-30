@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- {%load static%} -->
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
@@ -10,18 +11,31 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="{% static 'home_rooms/css/index.css' %}" />
+    <!-- <link rel="stylesheet" href="{% static 'quiz_create/css/quiz_create.css' %}"> -->
   </head>
   <body>
-    {%load static%}
-    <link rel="stylesheet" href="{% static 'quiz_create/css/quiz_create.css' %}">
     <div class="container">
       <header class="header">
         <h1>クイズアプリ</h1>
-        <select name="option" id="option">
-          ALL
-        </select>
-        <input type="text" />
-        <button class="btn btn-primary">検索</button>
+
+        <form action="{% url 'home' %}" method="get">
+          <label for="option-select">分野選択:</label>
+          <select name="category" id="option-select">
+            <option value="">ALL</option>
+            <option value="SCI">Science</option>
+            <option value="HIS">History</option>
+            <option value="SPT">Sport</option>
+            <option value="MTH">Math</option>
+            <option value="CMD">Comedy</option>
+            <option value="GMS">Games</option>
+            <option value="EDU">Education</option>
+            <option value="OTH">Other</option>
+          </select>
+
+          <!-- <input type="text" name="keyword" placeholder="検索ワード" /> -->
+          <button class="btn btn-primary">検索</button>
+        </form>
         <button><a href="{% url 'quiz_create' %}">クイズを作成</a></button>
         <button><a href="{% url 'login' %}">ログイン</a></button>
       </header>
@@ -31,16 +45,39 @@
         <div></div>
         <div></div>
       </div>
-      <div class="contents">
-        {% for quiz in quiz_result %}
-        <div class="content" style="border: 1px solid black">
-          <div class="option">{{ quiz.category }}</div>
-          <div class="title">{{ quiz.title }}</div>
-          <div class="description">{{ quiz.description }}</div>
-          <button>
-            <a href="{% url 'answerquiz' quiz.id %}">入室</a>
-          </button>
+
+      <div class="match_room">
+        <div class="card mt-3">
+          <div class="card-body">
+            <h3>対戦マッチ部屋</h3>
+            <button class="btn btn-primary float-end">
+              <a href="{% url 'quiz_match' %}?category={{ selected_category }}"
+                >入室</a
+              >
+              <!-- 押したときにフィルターされている分野を読み込む -->
+            </button>
+            <div>
+              説明 :
+              この分野の問題がランダムに5問表示されます。対戦相手と正解数を競おう
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="contents">
+        {% for quiz in quizzes %}
+        <div class="card mt-3">
+          <div class="card-body">
+            <div class="content option">{{ quiz.category }}</div>
+            <h3 class="title">{{ quiz.title }}</h3>
+            <button class="btn btn-primary float-end">
+              <a href="{% url 'answerquiz' quiz.id %}">入室</a>
+            </button>
+            <div class="description">説明 : {{ quiz.description }}</div>
+          </div>
+        </div>
+        {% empty %}
+        <p>該当するクイズがありません。</p>
         {% endfor %}
       </div>
 

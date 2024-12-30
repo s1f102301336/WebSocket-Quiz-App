@@ -15,3 +15,15 @@ def answerquiz(request, quiz_id):
         'quiz':quiz
     }
     return render(request, 'quiz/answerquiz.html', data)
+
+def quiz_match(request, quiz_id):
+
+    try:
+        quiz = Quiz.objects.get(pk=quiz_id)
+        
+    except Quiz.DoesNotExist:
+        raise Http404("Quiz does not exist")
+    data={
+        'quiz':quiz
+    }
+    return render(request, 'quiz/answerquiz.html', data)

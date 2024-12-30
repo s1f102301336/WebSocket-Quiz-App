@@ -5,33 +5,64 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'quiz/css/quiz.css' %}" />
-    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <title>Quiz回答</title>
   </head>
   <body>
     {%load static%}
-    <link rel="stylesheet" href="{% static 'quiz/css/quiz.css' %}">
-    <h1>クイズ回答</h1>
-    <button><a href="{% url 'home' %}">ホームへ戻る</a></button>
-    <p>{{quiz.category}}</p>
-    <h1>{{quiz.title}}</h1>
-    <p>{{quiz.description}}</p>
-    <h2>問題：</h2>
-    <h4>{{quiz.content}}</h4>
-    <h2>回答</h2>
-    <h4>ここに四つ選択肢がランダムでシャッフルされた順番で表示されます</h4>
-    <button id="correct_answer">{{quiz.correct_answer}}</button>
-    <button id="incorrect1">{{quiz.incorrect1}}</button>
-    <button id="incorrect2">{{quiz.incorrect2}}</button>
-    <button id="incorrect3">{{quiz.incorrect3}}</button>
+    <div class="container">
+      <h1>クイズ回答</h1>
+      <button><a href="{% url 'home' %}">ホームへ戻る</a></button>
+      <p>{{quiz.category}}</p>
+      <h1>{{quiz.title}}</h1>
+      <p>{{quiz.description}}</p>
+      <h2>問題：</h2>
+      <h4>{{quiz.content}}</h4>
+      <h2>回答</h2>
+      <h4>ここに四つ選択肢がランダムでシャッフルされた順番で表示されます</h4>
+      <div>
+        <button
+          class="selection"
+          id="correct_answer"
+          value="{{quiz.correct_answer}}"
+        >
+          {{quiz.correct_answer}}
+        </button>
+        <button class="selection" id="incorrect1" value="{{quiz.incorrect1}}">
+          {{quiz.incorrect1}}
+        </button>
+        <button class="selection" id="incorrect2" value="{{quiz.incorrect2}}">
+          {{quiz.incorrect2}}
+        </button>
+        <button class="selection" id="incorrect3" value="{{quiz.incorrect3}}">
+          {{quiz.incorrect3}}
+        </button>
+      </div>
 
-    <h4 id="result"></h4>
-    <p>解説</p>
-    <p id="explanation" class="hidden">{{quiz.explanation}}</p>
-    {{ quiz_name|json_script:"quiz_name" }}
-    <script
+      <div>
+        <h2>対戦状況</h2>
+        <p>自分の回答: <span id="my_answer"></span></p>
+        <p>相手の回答: <span id="opponent_answer"></span></p>
+        <p>自分のスコア: <span id="my_score">0</span></p>
+        <p>相手のスコア: <span id="opponent_score">0</span></p>
+      </div>
+
+      <div>
+        <p>解説</p>
+        <p id="explanation" class="hidden">{{quiz.explanation}}</p>
+      </div>
+    </div>
+
+    {{ quiz.id|json_script:"quiz_id" }}
+    <!-- <script
       type="text/javascript"
       src="{% static 'quiz/js/quiz.js' %}"
-    ></script>
+    ></script> -->
     <script type="text/javascript" src="{% static 'quiz/js/ws.js' %}"></script>
   </body>
 </html>
