@@ -13,6 +13,8 @@
   <body>
     <div align="center">
       <h1>ログイン</h1>
+      <!-- アカウント作成ボタン -->
+      <button><a href="{% url 'create_account' %}">アカウント作成はこちら</a></button>
       <button><a href="{% url 'home' %}">ホームへ戻る</a></button>
 
       <form>
@@ -49,6 +51,5 @@
           </tr>
         </table>
       </form>
-    </div>
   </body>
 </html>
