@@ -13,9 +13,14 @@
   <body>
     <div align="center">
       <h1>ログイン</h1>
+      <!-- アカウント作成ボタン -->
+      <button>
+        <a href="{% url 'create_account' %}">アカウント作成はこちら</a>
+      </button>
       <button><a href="{% url 'home' %}">ホームへ戻る</a></button>
 
-      <form>
+      <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
         <table>
           <tr>
             <td><label for="user-id">ユーザID:</label></td>

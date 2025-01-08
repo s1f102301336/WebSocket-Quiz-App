@@ -27,3 +27,4 @@ def quiz_match(request, quiz_id):
         'quiz':quiz
     }
     return render(request, 'quiz/answerquiz.html', data)
+

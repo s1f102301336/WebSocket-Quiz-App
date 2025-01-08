@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'daphne',
     'home_rooms',
     'accounts',
@@ -137,3 +138,8 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+# AUTH_USER_MODEL = 'accounts.User'  # 自作のUserモデルが 'accounts' アプリ内にある場合
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
