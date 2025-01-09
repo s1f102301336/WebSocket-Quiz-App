@@ -55,5 +55,12 @@
         </table>
       </form>
     </div>
+    {% if messages %}
+<div>
+    {% for message in messages %}
+    <p style="color: red;">{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
   </body>
 </html>
