@@ -1,66 +1,52 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const DATA_URL = "get_data";
+  // <script>タグに記載
   try {
-    // 全データの取得
-    const dataResponse = await fetch(DATA_URL);
-    const Data = await dataResponse.json();
+    const response = await fetch(DATA_URL);
+    const quizzes = await response.json();
+    console.log(response);
+    console.log(quizzes);
 
-    const quizNum = JSON.parse(
-      //jsonから値を読み込むだけ
-      document.getElementById("quiz_id").textContent
-    );
+    // 最初のクイズを表示
+    let currentQuizIndex = 0;
+    displayQuiz(quizzes[currentQuizIndex]);
 
-    // WebSocketの設定
-    const chatSocket = new WebSocket(
-      "ws://" + window.location.host + "/ws/quiz/" + quizNum + "/"
-    );
+    function displayQuiz(quiz) {
+      document.getElementById("quiz-title").textContent = quiz.title;
+      document.getElementById("quiz-description").textContent =
+        quiz.description;
+      document.getElementById("quiz-content").textContent = quiz.content;
 
-    // 初期スコア
-    let myScore = 0;
-    let opponentScore = 0;
+      document.getElementById("correct_answer").textContent =
+        quiz.correct_answer;
+      document.getElementById("correct_answer").value = quiz.correct_answer;
+      document.getElementById("incorrect1").textContent = quiz.incorrect1;
+      document.getElementById("incorrect1").value = quiz.incorrect1;
+      document.getElementById("incorrect2").textContent = quiz.incorrect2;
+      document.getElementById("incorrect2").value = quiz.incorrect2;
+      document.getElementById("incorrect3").textContent = quiz.incorrect3;
+      document.getElementById("incorrect3").value = quiz.incorrect3;
+      document.getElementById("quiz-explanation").textContent =
+        quiz.explanation;
 
-    // WebSocketメッセージの処理
-    chatSocket.onmessage = function (e) {
-      const data = JSON.parse(e.data);
+      // 選択肢の表示を更新
+    }
 
-      if (data.type === "my_result") {
-        // 自分の結果を更新
-        if (data.is_correct) {
-          myScore += 1;
-        }
-        document.getElementById("my_score").textContent = myScore;
-        document.getElementById("my_answer").textContent = data.is_correct
-          ? "正解!"
-          : "不正解!";
+    // 次の問題へ移行する処理
+    function nextQuestion() {
+      currentQuizIndex++;
+      if (currentQuizIndex < quizzes.length) {
+        displayQuiz(quizzes[currentQuizIndex]);
+      } else {
+        endGame();
       }
+    }
 
-      if (data.type === "opponent_answer") {
-        // 相手の結果を更新
-        opponentScore += data.is_correct ? 1 : 0;
-        document.getElementById("opponent_score").textContent = opponentScore;
-        document.getElementById("opponent_answer").textContent = data.is_correct
-          ? "正解!"
-          : "不正解!";
-      }
-    };
+    // クイズ終了処理
+    function endGame() {
+      document.getElementById("quiz-container").style.display = "none";
+      document.getElementById("end-screen").style.display = "block";
+    }
   } catch (error) {
-    console.error("Error:", error);
+    console.error("クイズデータの取得に失敗しました:", error);
   }
-});
-
-// ボタンのクリックイベントで回答を送信
-document.querySelectorAll(".selection").forEach((button) => {
-  button.addEventListener("click", (e) => {
-    const answer = e.target.value;
-    const correctAnswer = document.getElementById("correct_answer").value;
-    console.log("You clicked ", answer);
-
-    chatSocket.send(
-      JSON.stringify({
-        type: "answer",
-        answer: answer,
-        correct_answer: correctAnswer,
-      })
-    );
-  });
 });

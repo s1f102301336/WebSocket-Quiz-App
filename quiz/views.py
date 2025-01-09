@@ -21,16 +21,25 @@ def answerquiz(request, quiz_id):
     return render(request, 'quiz/answerquiz.html', data)
 
 def quiz_match(request, category):
-    return render(request, 'quiz/answerquiz.html',{"category":category})
+    print("category", category)
+    return render(request, 'quiz/quiz_match.html',{"category":category})
 
 def get_data(request, category):
-    quizzes = Quiz.objects.order_by('-id')#ランダムにしよう
-    selected_category = category
-    if selected_category:  # 選択された場合にフィルタリング
-        quizzes = quizzes.filter(
-            Q(category__icontains=selected_category))
-    else:  # "ALL" を選択した場合
-        print("ALL")
-        quizzes = Quiz.objects.all()
-        print(quizzes)
-    return JsonResponse(list(quizzes), safe=False)
+
+    if (category=="ALL"):
+            quizzes = Quiz.objects.all().order_by('-id')
+
+    else:
+    # 完全一致でクエリをフィルタリング
+        quizzes = Quiz.objects.filter(category=category).order_by('-id')
+    
+    # デバッグ用の出力
+    print(f"Category from URL: {category}")  # URLから受け取ったカテゴリ
+    print(f"Retrieved quizzes: {quizzes}")  # 取得したクイズ
+
+    # データが存在しない場合のハンドリング
+    if not quizzes.exists():
+        return JsonResponse({"error": "No quizzes found for this category", "title":"該当するクイズがありません。"}, status=404)
+    
+    # クエリセットをJSONレスポンスで返す
+    return JsonResponse(list(quizzes.values()), safe=False)

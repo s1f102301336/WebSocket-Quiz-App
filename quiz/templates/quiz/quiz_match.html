@@ -20,11 +20,11 @@
         <h1>{{ category }}の問題</h1>
       </div>
       <button><a href="{% url 'home' %}">ホームへ戻る</a></button>
-      <p>{{quiz.category}}</p>
-      <h1>{{quiz.title}}</h1>
-      <p>{{quiz.description}}</p>
+      <!-- <p id="quiz-category"></p> -->
+      <h1 id="quiz-title"></h1>
+      <p id="quiz-description"></p>
       <h2>問題：</h2>
-      <h4>{{quiz.content}}</h4>
+      <h4 id="quiz-content"></h4>
       <h2>回答</h2>
       <h4>ここに四つ選択肢がランダムでシャッフルされた順番で表示されます</h4>
       <div>
@@ -65,6 +65,13 @@
       type="text/javascript"
       src="{% static 'quiz/js/quiz.js' %}"
     ></script> -->
+    <script>
+      const category = "{{ category|escapejs }}"; // テンプレートから受け取ったカテゴリをエスケープして安全にJavaScript変数へ
+      const DATA_URL = `/quiz/get_data/${category}/`; // URLを構築
+      console.log("Category:", category); // 確認用
+      console.log("DATA_URL:", DATA_URL); // 確認用
+    </script>
+
     <script
       type="text/javascript"
       src="{% static 'quiz/js/match_ws.js' %}"
