@@ -59,6 +59,11 @@
               <a href="{% url 'login' %}" class="btn btn-outline-secondary"
                 >ログイン</a
               >
+               <!-- 他のリンクやボタン -->
+  <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button class="btn btn-outline-danger">ログアウト</button>
+  </form>
             </div>
           </div>
         </nav>
@@ -71,7 +76,11 @@
       </div>
 
       <div style="position: fixed; top: 0; left: 0; padding: 10px; background-color: #f0f0f0;">
-        ログイン中: ユーザ名 - {{ user.username }}
+        {% if user.is_authenticated %}
+          ログイン中: ユーザID - {{ user.username }}
+        {% else %}
+          ログインしていません
+        {% endif %}
       </div>
     
     
