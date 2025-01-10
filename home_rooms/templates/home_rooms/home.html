@@ -35,15 +35,15 @@
                   name="category"
                   id="option-select"
                 >
-                  <option value="">ALL</option>
-                  <option value="SCI">Science</option>
-                  <option value="HIS">History</option>
-                  <option value="SPT">Sport</option>
-                  <option value="MTH">Math</option>
-                  <option value="CMD">Comedy</option>
-                  <option value="GMS">Games</option>
-                  <option value="EDU">Education</option>
-                  <option value="OTH">Other</option>
+                  <option value="" {% if selected_category == "" %}selected{% endif %}>ALL</option>
+                  <option value="SCI" {% if selected_category == "SCI" %}selected{% endif %}>Science</option>
+                  <option value="HIS" {% if selected_category == "HIS" %}selected{% endif %}>History</option>
+                  <option value="SPT" {% if selected_category == "SPT" %}selected{% endif %}>Sport</option>
+                  <option value="MTH" {% if selected_category == "MTH" %}selected{% endif %}>Math</option>
+                  <option value="CMD" {% if selected_category == "CMD" %}selected{% endif %}>Comedy</option>
+                  <option value="GMS" {% if selected_category == "GMS" %}selected{% endif %}>Games</option>
+                  <option value="EDU" {% if selected_category == "EDU" %}selected{% endif %}>Education</option>
+                  <option value="OTH" {% if selected_category == "OTH" %}selected{% endif %}>Other</option>
                 </select>
                 <input
                   type="text"

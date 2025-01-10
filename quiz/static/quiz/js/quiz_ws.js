@@ -2,6 +2,7 @@ const quizNum = JSON.parse(
   //jsonから値を読み込むだけ
   document.getElementById("quiz_id").textContent
 );
+console.log("quizNum", quizNum);
 
 // WebSocketの設定
 const chatSocket = new WebSocket(
