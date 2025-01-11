@@ -10,17 +10,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     let opponentScore = 0;
 
     //準備OKをリセット
-    let myPreparation = null;
-    let oppPreparation = null;
-    let myID = null;
-    let oppID = null;
+    let myName = null;
+    let oppName = null;
 
     // WebSocket 設定
     const chatSocket = new WebSocket(
       "ws://" +
         window.location.host +
-        "/ws/quiz/" +
-        quizzes[currentQuizIndex].id +
+        "/ws/match/" +
+        quizzes[currentQuizIndex].category +
         "/"
     );
 
@@ -65,13 +63,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     //クイズを開始
-    const startQuiz = (myID, oppID) => {
+    const startQuiz = (myName, oppName) => {
       document.getElementById("wait_container").setAttribute("class", "hidden");
       document
         .getElementById("quiz_container")
         .removeAttribute("class", "hidden");
-      document.getElementById("myID").textContent = myID;
-      document.getElementById("oppID").textContent = oppID;
+      document.getElementById("myName").textContent = myName;
+      document.getElementById("oppName").textContent = oppName;
     };
 
     // 次のクイズに移行
@@ -121,20 +119,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         opponentAnswer = data.is_correct;
       }
 
-      if (data.type === "my_preparation") {
-        console.log("自分OK");
-
-        myPreparation = true;
-        myID = data.user_id;
-      }
-      if (data.type == "opponent_preparation") {
-        console.log("相手OK");
-        oppPreparation = true;
-        oppID = data.opponent_user_id;
-      }
-
-      if (myPreparation !== null && oppPreparation !== null) {
-        startQuiz(myID, oppID);
+      if (data.type === "start_game") {
+        myName = data.my_name;
+        oppName = data.opp_name;
+        startQuiz(myName, oppName);
       }
 
       // 両者の回答が揃ったら次の問題に進む
