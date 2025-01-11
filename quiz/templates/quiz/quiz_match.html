@@ -17,53 +17,85 @@
     <div class="container">
       <h1>クイズ回答</h1>
       <div class="theme_category">
-        <h1>{{ category }}の問題</h1>
+        <h1><span id="quiz-category"></span>の問題</h1>
       </div>
       <button><a href="{% url 'home' %}">ホームへ戻る</a></button>
-      <!-- <p id="quiz-category"></p> -->
-      <h1 id="quiz-title"></h1>
-      <p id="quiz-description"></p>
+      <div id="match_container">
+        <h1 id="quiz-title"></h1>
+        <p id="quiz-description"></p>
 
-      <div id="wait_container">
-        <h2>対戦相手を待っています...</h2>
+        <div id="wait_container">
+          <h2>対戦相手を待っています...</h2>
+        </div>
+        <div id="pre_container" class="hidden">
+          <h2>対戦相手が見つかりました！</h2>
+          <h2>あと<span id="start_count"></span>秒で開始します...</h2>
+          <div class="profile">
+            <h3>自分：<span class="myName"></span></h3>
+            <h3>相手：<span class="oppName"></span></h3>
+          </div>
+        </div>
+        <div id="quiz_container" class="hidden">
+          <div class="profile">
+            <h3>自分：<span class="myName"></span></h3>
+            <h3>相手：<span class="oppName"></span></h3>
+          </div>
+          <p id="answer_count_p">
+            回答終了まであと<span
+              id="answer_count"
+              style="font-weight: bold"
+            ></span
+            >秒
+          </p>
+          <p id="next_count_p">
+            次の問題まであと<span
+              id="next_count"
+              style="font-weight: bold"
+            ></span
+            >秒
+          </p>
+
+          <h2>問題：</h2>
+          <h4 id="quiz-content"></h4>
+          <div>
+            <button class="selection" id="correct_answer"></button>
+            <button class="selection" id="incorrect1"></button>
+            <button class="selection" id="incorrect2"></button>
+            <button class="selection" id="incorrect3"></button>
+          </div>
+
+          <div>
+            <h2>対戦状況</h2>
+            <p>自分の判定: <span id="my_judge"></span></p>
+            <p>相手の判定: <span id="opp_judge"></span></p>
+            <div id="now_result">
+              <p>自分の回答: <span id="my_answer"></span></p>
+              <p>相手の回答: <span id="opp_answer"></span></p>
+              <p>自分のスコア: <span id="my_score">0</span></p>
+              <p>相手のスコア: <span id="opp_score">0</span></p>
+            </div>
+          </div>
+
+          <div>
+            <p>解説</p>
+            <p id="quiz-explanation"></p>
+          </div>
+        </div>
       </div>
-      <div id="quiz_container" class="hidden">
-        <div class="profile">
-          <h3>自分：<span id="myName"></span></h3>
-          <h3>相手：<span id="oppName"></span></h3>
-        </div>
-
-        <h2>問題：</h2>
-        <h4 id="quiz-content"></h4>
-        <div>
-          <button class="selection" id="correct_answer"></button>
-          <button class="selection" id="incorrect1"></button>
-          <button class="selection" id="incorrect2"></button>
-          <button class="selection" id="incorrect3"></button>
-        </div>
-
-        <div>
-          <h2>対戦状況</h2>
-          <p>自分の回答: <span id="my_answer"></span></p>
-          <p>自分の回答: <span id="my_judge"></span></p>
-          <p>相手の回答: <span id="opponent_answer"></span></p>
-          <p>相手の回答: <span id="opponent_judge"></span></p>
-          <p>自分のスコア: <span id="my_score">0</span></p>
-          <p>相手のスコア: <span id="opponent_score">0</span></p>
-        </div>
-
-        <div>
-          <p>解説</p>
-          <p id="explanation" class="hidden"></p>
-        </div>
+      <div id="result_container" class="hidden">
+        <h1>対戦結果</h1>
+        <table>
+          <tr>
+            <th>問題</th>
+            <th><span class="myName"></span></th>
+            <th><span class="oppName"></span></th>
+          </tr>
+          <tbody id="quiz_result"></tbody>
+        </table>
+        <h1 id="winner"></h1>
       </div>
     </div>
 
-    <!-- {{ quiz.id|json_script:"quiz_id" }} -->
-    <!-- <script
-      type="text/javascript"
-      src="{% static 'quiz/js/quiz.js' %}"
-    ></script> -->
     <script>
       const category = "{{ category|escapejs }}"; // テンプレートから受け取ったカテゴリをエスケープして安全にJavaScript変数へ
       const DATA_URL = `/quiz/get_data/${category}/`; // URLを構築

@@ -20,7 +20,7 @@ class QuizConsumer(AsyncWebsocketConsumer):
             )
             await self.accept()
             print(f"{self.user.username}が接続しました")
-            print("room_info", self.scope)
+            # print("room_info", self.scope)
 
             # 部屋に入ると同時に準備完了
             # 自分にメッセージを送信する
@@ -36,7 +36,7 @@ class QuizConsumer(AsyncWebsocketConsumer):
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
-                    "type": "opponent_preparation",
+                    "type": "opp_preparation",
                     "user_name": self.user.username,
                     "user_id": self.user.id,
                 }
@@ -79,25 +79,25 @@ class QuizConsumer(AsyncWebsocketConsumer):
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
-                    "type": "opponent_answer",
+                    "type": "opp_answer",
                     "user_id": self.user.id,
                     "answer": answer,
                     "is_correct": is_correct,
                 }
             )
 
-    async def opponent_answer(self, event):
+    async def opp_answer(self, event):
 
         # グループにきた他プレイヤーからのメッセージを受信し、自分に送信
         if event["user_id"] != self.user.id:
             await self.send(text_data=json.dumps({
-                "type": "opponent_answer",
+                "type": "opp_answer",
                 "answer": event["answer"],
                 "is_correct": event["is_correct"]
             }))
 
 
-    async def opponent_preparation(self, event):
+    async def opp_preparation(self, event):
 
         if event["user_id"] != self.user.id:
             print("相手は準備完了")
@@ -114,7 +114,6 @@ class QuizConsumer(AsyncWebsocketConsumer):
             )
 
     async def start_game(self, event):
-
         # グループにゲームスタートのメッセージを送信
         n, m =  (2, 1) if event["player1_id"] != self.user.id else (1, 2)
         await self.send(text_data=json.dumps({
