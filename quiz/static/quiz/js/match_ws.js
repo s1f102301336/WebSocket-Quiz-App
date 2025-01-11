@@ -287,15 +287,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         .getElementById("result_container")
         .removeAttribute("class", "hidden");
 
-      const result_judge = getElementById("winner");
-      result_judge.textContent = [
-        `${myName}の勝ち！`,
-        `${oppName}の勝ち！`,
-        "引き分け！",
-      ][
-        +(score_p["myScore"] >= score_p["oppScore"]) +
-          +(score_p["myScore"] === score_p["oppScore"])
-      ];
+      const result_judge = document.getElementById("winner");
+      result_judge.textContent =
+        score_p["myScore"] === score_p["oppScore"]
+          ? "引き分け"
+          : score_p["myScore"] > score_p["oppScore"]
+          ? `${myName}の勝ち！`
+          : `${oppName}の勝ち！`;
 
       // alert(
       //   "クイズ終了！最終スコア: 自分 - " +
