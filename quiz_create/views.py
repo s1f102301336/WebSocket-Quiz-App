@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from .models import Quiz
 from .forms import QuizForm
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 #未入力の場合alert発生させる
 #作成したらページも作成
 #自分が作成したクイズのみ、編集や削除ができると良い
 
+@login_required
 def quiz_create(request):
     return render(request, 'quiz_create/makequiz.html')
 

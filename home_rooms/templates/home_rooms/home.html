@@ -29,6 +29,7 @@
             {{ request.user.is_authenticated }}
             <div class="d-flex align-items-center">
               <form action="{% url 'home' %}" method="get">
+                {% csrf_token %}
                 <label for="option-select">分野選択:</label>
                 <select
                   class="form-select me-2"
@@ -60,10 +61,9 @@
                 >ログイン</a
               >
                <!-- 他のリンクやボタン -->
-  <form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
-    <button class="btn btn-outline-danger">ログアウト</button>
-  </form>
+              <a href="{% url 'logout' %}">
+                <button class="btn btn-outline-danger">ログアウト</button>
+              </a>
             </div>
           </div>
         </nav>

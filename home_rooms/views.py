@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from quiz_create.models import Quiz
 from django.db.models import Q
-from django.contrib.auth import logout
 from django.shortcuts import redirect
 
 # Create your views here.
@@ -19,6 +18,3 @@ def home_rooms(request):
     return render(request, 'home_rooms/home.html', {'quizzes':quizzes,'selected_category':selected_category})
 
 
-def logout_view(request):
-    logout(request)
-    return redirect('login')

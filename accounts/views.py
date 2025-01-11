@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+
 
 def login(request):
     if request.method == 'POST':
@@ -33,6 +35,8 @@ def create_accounts(request):
 
     return render(request, 'accounts/create_account.html')
 
-@login_required
-def home(request):
-    return render(request, 'accounts/home.html', {'user': request.user})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
