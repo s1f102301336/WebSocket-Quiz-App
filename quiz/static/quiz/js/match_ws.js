@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("quiz-content").textContent = quiz.content;
       document.getElementById("quiz-explanation").textContent =
         quiz.explanation;
+      document.getElementById("quiz-correct").textContent = quiz.correct_answer;
       console.log("ここ1");
 
       const answers = [
@@ -66,16 +67,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       console.log("ここ3");
       // 解説を非表示
-      document
-        .getElementById("quiz-explanation")
-        .setAttribute("class", "hidden");
+      document.getElementById("explanation").setAttribute("class", "hidden");
+      document.getElementById("quiz-correct").setAttribute("class", "hidden");
       //回答を非表示
       document.getElementById("now_result").setAttribute("class", "hidden");
       //タイマー表示リセット
       document.getElementById("next_count_p").setAttribute("class", "hidden");
-      document
-        .getElementById("answer_count_p")
-        .removeAttribute("class", "hidden");
+      document.getElementById("answer_count_p").classList.remove("hidden");
 
       console.log("ここ4");
       // 状況リセット
@@ -164,7 +162,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById(`${p}_judge`).textContent = data.is_correct
         ? "正解"
         : "不正解";
-      score_p[`${p}Score`] += data.is_correct ? 1 : 0;
+      score_p[`${p}Score`] += data.is_correct ? 10 : 0;
       document.getElementById(`${p}_score`).textContent = score_p[`${p}Score`];
       ans_p[`${p}Answer`] = data.is_correct; //Finかどうか調べるため
       console.log("score", score_p);
@@ -204,9 +202,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       //相手待ち画面を隠す
       document.getElementById("wait_container").setAttribute("class", "hidden");
       //準備画面
-      document
-        .getElementById("pre_container")
-        .removeAttribute("class", "hidden");
+      document.getElementById("pre_container").classList.remove("hidden");
       const ms = document.getElementsByClassName("myName");
       const os = document.getElementsByClassName("oppName");
       for (let i = 0; i < ms.length; i++) {
@@ -216,9 +212,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       await countDown("pre", 5);
       document.getElementById("pre_container").setAttribute("class", "hidden");
       //クイズ画面
-      document
-        .getElementById("quiz_container")
-        .removeAttribute("class", "hidden");
+      const quiz_con = Array.from(
+        document.getElementsByClassName("quiz_container")
+      );
+
+      quiz_con.forEach((tag) => tag.classList.remove("hidden")); // "hidden" クラスを削除
+
       displayQuiz(quizzes[currentQuizIndex]);
     };
 
@@ -229,15 +228,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.log("score1", score_p);
       console.log("answer1", ans_p);
 
-      document
-        .getElementById("quiz-explanation")
-        .removeAttribute("class", "hidden");
-      document.getElementById("now_result").removeAttribute("class", "hidden");
+      document.getElementById("explanation").classList.remove("hidden");
+      document.getElementById("quiz-correct").classList.remove("hidden");
+      document.getElementById("now_result").classList.remove("hidden");
 
       document.getElementById("answer_count_p").setAttribute("class", "hidden");
-      document
-        .getElementById("next_count_p")
-        .removeAttribute("class", "hidden");
+      document.getElementById("next_count_p").classList.remove("hidden");
       await countDown("next", 5);
       isChangingQuiz = false;
 
@@ -280,12 +276,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       result.appendChild(tr);
 
       //html表示
-      document
-        .getElementById("match_container")
-        .setAttribute("class", "hidden");
-      document
-        .getElementById("result_container")
-        .removeAttribute("class", "hidden");
+      const quiz_con = Array.from(
+        document.getElementsByClassName("quiz_container")
+      );
+
+      quiz_con.forEach((tag) => tag.setAttribute("class", "hidden"));
+      document.getElementById("result_container").classList.remove("hidden");
 
       const result_judge = document.getElementById("winner");
       result_judge.textContent =
