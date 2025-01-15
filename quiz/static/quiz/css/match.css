@@ -38,13 +38,13 @@ body {
   text-align: center;
   font-size: 2.5rem;
   text-align: center;
-  margin: 3rem 0;
+  /* padding: 3rem 0; */
   animation: pulse 2s infinite;
 }
 
 #wait_container h2 {
-  margin-top: 30%;
-  margin-bottom: 30%;
+  padding-top: 30%;
+  padding-bottom: 30%;
 }
 
 @keyframes pulse {
