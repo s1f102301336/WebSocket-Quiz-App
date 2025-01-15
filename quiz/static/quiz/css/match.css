@@ -1,0 +1,152 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.Logo-p {
+  width: 40%;
+}
+
+.Logo {
+  width: 100%;
+  height: 70px;
+  object-fit: none;
+}
+
+.match_back {
+  height: 100%; /* 画面いっぱいの高さを適用 */
+  background-color: #54c3ff; /* 背景色 */
+  display: flex; /* 中央揃えのためのFlexbox */
+  justify-content: center; /* 水平方向に中央揃え */
+  overflow: visible; /* 子要素を制限しない */
+}
+
+.match_body {
+}
+
+#match_container {
+  position: relative;
+}
+
+#wait_container h2 {
+  font-size: 60px;
+  text-align: center;
+  font-size: 2.5rem;
+  text-align: center;
+  /* padding: 3rem 0; */
+  animation: pulse 2s infinite;
+}
+
+#wait_container h2 {
+  padding-top: 30%;
+  padding-bottom: 30%;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pre-text {
+  padding-top: 15%;
+  padding-bottom: 10%;
+}
+
+#pre_container h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-top: 2%;
+}
+#pre_container span {
+}
+
+#pre_container {
+  margin-top: 10%;
+}
+
+.profile {
+  display: inline-block;
+  width: fit-content;
+}
+
+/* クイズ画面 */
+.quiz_info {
+  background-color: #c9ebff;
+}
+
+#answer_count,
+#next_count {
+  font-size: 3rem;
+}
+
+.vs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#my_judge,
+#opp_judge {
+  font-size: 3vw;
+}
+
+.myName,
+.oppName,
+#my_score,
+#opp_score,
+#th_q {
+  font-size: 2vw;
+}
+
+.counts {
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+
+/*センターにするクラス*/
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.results_body {
+  width: 30%;
+  height: 100%;
+}
+
+.selection {
+  position: relative; /* 親要素に埋もれないようにする */
+  z-index: 10; /* 背景色の前面に表示 */
+  width: 100%; /* 横幅いっぱい */
+  height: 100%; /* 縦幅いっぱい */
+  background-color: white !important; /* 白背景 */
+  border: 2px solid #c9ebff !important; /* ボーダーの色と太さを指定 */
+  border-radius: 5px !important; /* ボタンの角を丸める */
+  outline: none; /* フォーカス枠なし */
+  cursor: pointer; /* ポインターに切り替え */
+  transition: background-color 0.3s ease, border-color 0.3s ease; /* ホバー時のアニメーション */
+}
+
+/* ホバースタイル */
+.selection:hover {
+  background-color: yellow !important; /* クリックされたボタンの背景色を黄色に設定 */
+  border-color: yellow !important; /* ホバー時にボーダー色を黄色に変更 */
+}
+
+/* クリックされた場合のスタイル */
+.selection.clicked {
+  background-color: yellow !important; /* クリックされたボタンの背景色を黄色に設定 */
+  border-color: yellow !important; /* ホバー時にボーダー色を黄色に変更 */
+}

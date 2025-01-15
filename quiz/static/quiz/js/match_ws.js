@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let myName = null;
     let oppName = null;
     let isChangingQuiz = false;
+    let is_check = false;
 
     // 現在の回答状況
     let score_p = { myScore: 0, oppScore: 0 };
@@ -43,6 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("quiz-content").textContent = quiz.content;
       document.getElementById("quiz-explanation").textContent =
         quiz.explanation;
+      document.getElementById("quiz-correct").textContent = quiz.correct_answer;
       console.log("ここ1");
 
       const answers = [
@@ -62,20 +64,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         button.value = shuffledAnswers[index].text;
         button.dataset.is_correct = shuffledAnswers[index].is_correct;
         button.removeAttribute("disabled");
+        button.classList.remove("clicked");
       });
 
       console.log("ここ3");
       // 解説を非表示
-      document
-        .getElementById("quiz-explanation")
-        .setAttribute("class", "hidden");
+      document.getElementById("explanation").setAttribute("class", "hidden");
+      document.getElementById("quiz-correct").setAttribute("class", "hidden");
       //回答を非表示
       document.getElementById("now_result").setAttribute("class", "hidden");
       //タイマー表示リセット
       document.getElementById("next_count_p").setAttribute("class", "hidden");
-      document
-        .getElementById("answer_count_p")
-        .removeAttribute("class", "hidden");
+      document.getElementById("answer_count_p").classList.remove("hidden");
 
       console.log("ここ4");
       // 状況リセット
@@ -83,8 +83,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       ans_p["oppAnswer"] = null;
       document.getElementById("my_answer").textContent = "";
       document.getElementById("opp_answer").textContent = "";
-      document.getElementById("my_judge").textContent = "";
-      document.getElementById("opp_judge").textContent = "";
+      document.getElementById("my_judge").textContent = " ";
+      document.getElementById("opp_judge").textContent = " ";
+      is_check = false;
 
       console.log("ここ5");
 
@@ -125,13 +126,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     //ボタン非表示
     const disable = (push) => {
-      const all = true ? push === "ALL" : false;
+      const all = push === "ALL";
+
       const buttons = document.getElementsByClassName("selection");
-      console.log(push.id);
+      console.log("push", push);
       for (let i = 0; i < buttons.length; i++) {
         console.log(buttons[i].id);
-        if (buttons[i].id != push.id || all) {
-          buttons[i].disabled = "disabled";
+        if (all || buttons[i].id !== push.id) {
+          buttons[i].disabled = true;
         }
       }
     };
@@ -140,13 +142,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const TimeUp = async () => {
       await countDown("ans", 5); //本来2-30
       if (!isFinished()) {
-        console.log("TimeUp");
-        disable("ALL");
         if (ans_p["myAnswer"] === null) {
+          console.log("myTimeUp");
+          disable("ALL");
           document.getElementById("my_answer").textContent = "時間切れ";
           document.getElementById("my_judge").textContent = "不正解";
         }
         if (ans_p["oppAnswer"] === null) {
+          console.log("oppTimeUp");
           document.getElementById("opp_answer").textContent = "時間切れ";
           document.getElementById("opp_judge").textContent = "不正解";
         }
@@ -164,7 +167,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById(`${p}_judge`).textContent = data.is_correct
         ? "正解"
         : "不正解";
-      score_p[`${p}Score`] += data.is_correct ? 1 : 0;
+      score_p[`${p}Score`] += data.is_correct ? 10 : 0;
       document.getElementById(`${p}_score`).textContent = score_p[`${p}Score`];
       ans_p[`${p}Answer`] = data.is_correct; //Finかどうか調べるため
       console.log("score", score_p);
@@ -204,9 +207,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       //相手待ち画面を隠す
       document.getElementById("wait_container").setAttribute("class", "hidden");
       //準備画面
-      document
-        .getElementById("pre_container")
-        .removeAttribute("class", "hidden");
+      document.getElementById("pre_container").classList.remove("hidden");
       const ms = document.getElementsByClassName("myName");
       const os = document.getElementsByClassName("oppName");
       for (let i = 0; i < ms.length; i++) {
@@ -216,9 +217,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       await countDown("pre", 5);
       document.getElementById("pre_container").setAttribute("class", "hidden");
       //クイズ画面
-      document
-        .getElementById("quiz_container")
-        .removeAttribute("class", "hidden");
+      const quiz_con = Array.from(
+        document.getElementsByClassName("quiz_container")
+      );
+
+      quiz_con.forEach((tag) => tag.classList.remove("hidden")); // "hidden" クラスを削除
+
       displayQuiz(quizzes[currentQuizIndex]);
     };
 
@@ -229,15 +233,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.log("score1", score_p);
       console.log("answer1", ans_p);
 
-      document
-        .getElementById("quiz-explanation")
-        .removeAttribute("class", "hidden");
-      document.getElementById("now_result").removeAttribute("class", "hidden");
+      document.getElementById("explanation").classList.remove("hidden");
+      document.getElementById("quiz-correct").classList.remove("hidden");
+      document.getElementById("now_result").classList.remove("hidden");
 
       document.getElementById("answer_count_p").setAttribute("class", "hidden");
-      document
-        .getElementById("next_count_p")
-        .removeAttribute("class", "hidden");
+      document.getElementById("next_count_p").classList.remove("hidden");
       await countDown("next", 5);
       isChangingQuiz = false;
 
@@ -280,12 +281,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       result.appendChild(tr);
 
       //html表示
-      document
-        .getElementById("match_container")
-        .setAttribute("class", "hidden");
-      document
-        .getElementById("result_container")
-        .removeAttribute("class", "hidden");
+      const quiz_con = Array.from(
+        document.getElementsByClassName("quiz_container")
+      );
+
+      quiz_con.forEach((tag) => tag.setAttribute("class", "hidden"));
+      document.getElementById("result_container").classList.remove("hidden");
 
       const result_judge = document.getElementById("winner");
       result_judge.textContent =
@@ -336,6 +337,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 回答ボタンのイベントリスナー設定
     document.querySelectorAll(".selection").forEach((button) => {
       button.addEventListener("click", (e) => {
+        if (is_check) {
+          return;
+        }
+        is_check = true;
+        button.classList.add("clicked");
         disable(button);
         const answer = e.target.value;
         const is_correct = e.target.dataset.is_correct === "true";

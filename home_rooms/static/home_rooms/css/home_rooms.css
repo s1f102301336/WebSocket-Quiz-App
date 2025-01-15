@@ -1,47 +1,157 @@
+/* base.css */
+
+/* 全体のスタイル */
 body {
-  background-color: #f9f9f9;
-  font-family: Arial, sans-serif;
-  color: #333;
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #4fc3f7; /* ベースカラー */
+  color: #333;
 }
 
+/* コンテナ */
 .container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* タイトルと説明を中央揃え */
-.container h1,
-.container p {
+/* 共通スタイル */
+.header,
+.footer {
+  width: 100%;
   text-align: center;
-  margin: 0 auto;
+  background-color: #039be5; /* 濃い青 */
+  color: white;
+  padding: 10px 0;
 }
 
-/* 回答部分を非表示にする */
-.container div:nth-of-type(2) {
-  display: none;
+.card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 300px;
+  margin: 10px 0;
 }
 
-/* その他のスタイリング */
-button {
+/* 各セクション */
+.timer {
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: #ffcc80; /* オレンジ */
   padding: 10px 20px;
-  font-size: 16px;
+  border-radius: 10px;
+  color: #333;
+}
+
+.question-box {
+  background-color: #e3f2fd; /* 明るい青 */
+  border: 2px solid #0288d1; /* ボーダー濃い青 */
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.answer-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.answer-box button {
+  background-color: #29b6f6;
+  color: white;
   border: none;
+  padding: 10px;
+  font-size: 16px;
   border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #0056b3;
+.answer-box button:hover {
+  background-color: #0288d1;
 }
 
-.hidden {
-  display: none;
+/* VS画面のスタイル */
+.vs-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  background-color: white;
+  border-radius: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #0288d1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* タイトル画面 */
+.title-card {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #0288d1;
+}
+
+.category-bar {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.category-bar div {
+  background-color: #e1f5fe;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.category-bar div:hover {
+  background-color: #b3e5fc;
+}
+
+/* ログイン画面 */
+.login-card {
+  width: 300px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.login-card button {
+  width: 100%;
+  background-color: #039be5;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-card button:hover {
+  background-color: #0277bd;
 }
