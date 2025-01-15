@@ -1,3 +1,89 @@
-.hidden {
-  display: none;
+/* 全体のスタイル */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #41B8FE; /* 背景を青色に設定 */
 }
+
+/* ヘッダー */
+.header {
+  background-color: #ffffff;
+  padding: 20px 20px; /* 上部を広げる */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.header .btn {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.header .btn a {
+  color: white;
+  text-decoration: none;
+}
+
+/* タイトルと説明の背景色 */
+.quiz-title,
+.quiz-description {
+  background-color: #C9EBFF; /* タイトルと説明の背景色 */
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* クイズの選択肢 */
+.quiz-options .quiz-option {
+  background-color: #FFEB3B; /* 黄色 */
+  color: #333; /* テキストを黒に */
+  border: none; /* ボーダーなし */
+  border-radius: 8px; /* 角を丸く */
+  padding: 15px 20px; /* 余白を調整 */
+  font-size: 16px; /* テキストサイズ */
+  font-weight: bold; /* 太字 */
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 影を追加 */
+  transition: transform 0.2s ease, background-color 0.2s ease; /* アニメーション */
+}
+
+.quiz-options .quiz-option:hover {
+  background-color: #FFD700; /* 濃い黄色 */
+  transform: translateY(-3px); /* 浮き上がる効果 */
+}
+
+/* 解説セクション */
+#explanation {
+  background-color: #ffffff; /* 白い背景 */
+  padding: 20px; /* 内側の余白 */
+  border-radius: 8px; /* 角を丸くする */
+  font-size: 16px;
+  color: #333; /* 文字色 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+  border: 1px solid #ddd; /* 枠線を追加 */
+  display: none; /* 初期状態は非表示 */
+  margin-top: 20px; /* 上との余白を追加 */
+}
+
+/* 問題セクション */
+.quiz-question {
+  background-color: #ffffff; /* 白い背景 */
+  padding: 20px; /* 内側の余白 */
+  border-radius: 8px; /* 角を丸くする */
+  font-size: 20px;
+  color: #333; /* 文字色 */
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+  margin-bottom: 20px; /* 下の要素との余白 */
+  border: 1px solid #ddd; /* 枠線を追加 */
+}
+

@@ -4,53 +4,68 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'quiz/css/quiz.css' %}" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="{% static 'quiz/css/quiz.css' %}" />
     <title>Quiz回答</title>
   </head>
   <body>
-    <div class="container">
-      <h1>クイズ回答</h1>
-      <button><a href="{% url 'home' %}">ホームへ戻る</a></button>
-      <p>{{quiz.category}}</p>
-      <h1>{{quiz.title}}</h1>
-      <p>{{quiz.description}}</p>
-      <h2>問題：</h2>
-      <h4>{{quiz.content}}</h4>
-      <h2>回答</h2>
-      <h4>ここに四つ選択肢がランダムでシャッフルされた順番で表示されます</h4>
-      <div>
-        {% for key, selection in selections.items %}
-        <button class="selection" id="{{ key }}" value="{{ selection }}">
-          {{ selection }}
+    <!-- ヘッダー -->
+    <header class="header">
+      <div class="container d-flex justify-content-between align-items-center">
+        <h1 class="logo">クイズアプリ</h1>
+        <button class="btn btn-primary">
+          <a href="{% url 'home' %}" class="text-white text-decoration-none">ホームへ戻る</a>
         </button>
-        {% endfor %}
       </div>
+    </header>
 
-      <div>
-        <h2>結果：</h2>
-        <h2 id="result"></h2>
-      </div>
+    <!-- メインコンテンツ -->
+    <div class="container mt-4 p-4 rounded" style="background-color: #41B8FE">
+      <!-- クイズ情報 -->
+      <section class="text-center mb-4">
+        <h2 class="quiz-title">{{ quiz.title }}</h2>
+        <p class="quiz-description">{{ quiz.description }}</p>
+      </section>
 
-      <div>
-        <p>解説</p>
-        <p id="explanation" class="hidden">{{quiz.explanation}}</p>
-      </div>
+      <!-- クイズの問題 -->
+      <section class="text-center mb-4">
+        <h3>問題：</h3>
+        <p class="quiz-question">{{ quiz.content }}</p>
+      </section>
+
+      <!-- クイズの選択肢 -->
+      <section class="text-center mb-4">
+        <div class="quiz-options d-flex flex-wrap justify-content-center gap-2">
+          {% for key, selection in selections.items %}
+          <button class="btn btn-outline-primary quiz-option" id="{{ key }}" value="{{ selection }}">
+            {{ selection }}
+          </button>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- 結果表示 -->
+      <section class="text-center mb-4">
+        <h3>結果：</h3>
+        <h2 id="result" class="result-text"></h2>
+      </section>
+
+      <!-- 解説表示 -->
+      <section class="text-center">
+        <h3>解説：</h3>
+        <p id="explanation" class="hidden">{{ quiz.explanation }}</p>
+      </section>
     </div>
 
-    <!-- {{ quiz.id|json_script:"quiz_id" }} -->
+    <!-- JavaScript -->
     <script
       type="text/javascript"
       src="{% static 'quiz/js/quiz.js' %}"
     ></script>
-    <!-- <script
-      type="text/javascript"
-      src="{% static 'quiz/js/quiz_ws.js' %}"
-    ></script> -->
   </body>
 </html>
