@@ -141,6 +141,7 @@ body {
 
 /* ホバースタイル */
 .selection:hover {
+  background-color: yellow !important; /* クリックされたボタンの背景色を黄色に設定 */
   border-color: yellow !important; /* ホバー時にボーダー色を黄色に変更 */
 }
 
