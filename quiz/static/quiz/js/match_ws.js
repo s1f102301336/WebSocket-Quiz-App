@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let myName = null;
     let oppName = null;
     let isChangingQuiz = false;
+    let is_check = false;
 
     // 現在の回答状況
     let score_p = { myScore: 0, oppScore: 0 };
@@ -63,6 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         button.value = shuffledAnswers[index].text;
         button.dataset.is_correct = shuffledAnswers[index].is_correct;
         button.removeAttribute("disabled");
+        button.classList.remove("clicked");
       });
 
       console.log("ここ3");
@@ -81,8 +83,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       ans_p["oppAnswer"] = null;
       document.getElementById("my_answer").textContent = "";
       document.getElementById("opp_answer").textContent = "";
-      document.getElementById("my_judge").textContent = "";
-      document.getElementById("opp_judge").textContent = "";
+      document.getElementById("my_judge").textContent = " ";
+      document.getElementById("opp_judge").textContent = " ";
+      is_check = false;
 
       console.log("ここ5");
 
@@ -123,13 +126,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     //ボタン非表示
     const disable = (push) => {
-      const all = true ? push === "ALL" : false;
+      const all = push === "ALL";
+
       const buttons = document.getElementsByClassName("selection");
-      console.log(push.id);
+      console.log("push", push);
       for (let i = 0; i < buttons.length; i++) {
         console.log(buttons[i].id);
-        if (buttons[i].id != push.id || all) {
-          buttons[i].disabled = "disabled";
+        if (all || buttons[i].id !== push.id) {
+          buttons[i].disabled = true;
         }
       }
     };
@@ -138,13 +142,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const TimeUp = async () => {
       await countDown("ans", 5); //本来2-30
       if (!isFinished()) {
-        console.log("TimeUp");
-        disable("ALL");
         if (ans_p["myAnswer"] === null) {
+          console.log("myTimeUp");
+          disable("ALL");
           document.getElementById("my_answer").textContent = "時間切れ";
           document.getElementById("my_judge").textContent = "不正解";
         }
         if (ans_p["oppAnswer"] === null) {
+          console.log("oppTimeUp");
           document.getElementById("opp_answer").textContent = "時間切れ";
           document.getElementById("opp_judge").textContent = "不正解";
         }
@@ -332,6 +337,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 回答ボタンのイベントリスナー設定
     document.querySelectorAll(".selection").forEach((button) => {
       button.addEventListener("click", (e) => {
+        if (is_check) {
+          return;
+        }
+        is_check = true;
+        button.classList.add("clicked");
         disable(button);
         const answer = e.target.value;
         const is_correct = e.target.dataset.is_correct === "true";
