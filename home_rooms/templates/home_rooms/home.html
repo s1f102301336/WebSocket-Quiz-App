@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- {%load static%} -->
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
@@ -10,36 +11,117 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'quiz_create/css/quiz_create.css' %}" />
+    <link rel="stylesheet" href="{% static 'home_rooms/css/index.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'quiz_create/css/quiz_create.css' %}"
+    />
   </head>
   <body>
     <div class="container">
       <!-- Header -->
       <header class="mb-4">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3">
+        <nav
+          class="navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3"
+        >
           <div class="container-fluid">
             <a class="navbar-brand" href="#">クイズアプリ</a>
+            {{ request.user.is_authenticated }}
             <div class="d-flex align-items-center">
-              <select class="form-select me-2" name="option" id="option">
-                <option value="all">ALL</option>
-                <!-- 他のオプションをここに追加 -->
-              </select>
-              <input
-                type="text"
-                class="form-control me-2"
-                placeholder="検索キーワードを入力"
-              />
-              <button class="btn btn-primary me-2">検索</button>
-              <a href="{% url 'quiz_create' %}" class="btn btn-success me-2">クイズを作成</a>
-              <a href="{% url 'login' %}" class="btn btn-outline-secondary">ログイン</a>
+              <form action="{% url 'home' %}" method="get">
+                {% csrf_token %}
+                <label for="option-select">分野選択:</label>
+                <select
+                  class="form-select me-2"
+                  name="category"
+                  id="option-select"
+                >
+                  <option value="" {% if selected_category == "" %}selected{% endif %}>ALL</option>
+                  <option value="SCI" {% if selected_category == "SCI" %}selected{% endif %}>Science</option>
+                  <option value="HIS" {% if selected_category == "HIS" %}selected{% endif %}>History</option>
+                  <option value="SPT" {% if selected_category == "SPT" %}selected{% endif %}>Sport</option>
+                  <option value="MTH" {% if selected_category == "MTH" %}selected{% endif %}>Math</option>
+                  <option value="CMD" {% if selected_category == "CMD" %}selected{% endif %}>Comedy</option>
+                  <option value="GMS" {% if selected_category == "GMS" %}selected{% endif %}>Games</option>
+                  <option value="EDU" {% if selected_category == "EDU" %}selected{% endif %}>Education</option>
+                  <option value="OTH" {% if selected_category == "OTH" %}selected{% endif %}>Other</option>
+                </select>
+                <input
+                  type="text"
+                  class="form-control me-2"
+                  placeholder="検索キーワードを入力"
+                />
+                <!-- <input type="text" name="keyword" placeholder="検索ワード" /> -->
+                <button class="btn btn-primary me-2">検索</button>
+              </form>
+              <a href="{% url 'quiz_create' %}" class="btn btn-success me-2"
+                >クイズを作成</a
+              >
+              <a href="{% url 'login' %}" class="btn btn-outline-secondary"
+                >ログイン</a
+              >
+               <!-- 他のリンクやボタン -->
+              <a href="{% url 'logout' %}">
+                <button class="btn btn-outline-danger">ログアウト</button>
+              </a>
             </div>
           </div>
         </nav>
       </header>
 
-      <div class="row">
-        <!-- Sidebar -->
+      <div class="sidebar">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <div style="position: fixed; top: 0; left: 0; padding: 10px; background-color: #f0f0f0;">
+        {% if user.is_authenticated %}
+          ログイン中: ユーザID - {{ user.username }}
+        {% else %}
+          ログインしていません
+        {% endif %}
+      </div>
+    
+    
+      <div class="match_room">
+        <div class="card mt-3">
+          <div class="card-body">
+            <h3>対戦マッチ部屋</h3>
+            <button class="btn btn-primary float-end">
+              <a
+                href="{% url 'quiz_match' category=selected_category|default:'ALL' %}"
+                >入室</a
+              >
+
+              <!-- 押したときにフィルターされている分野を読み込む -->
+            </button>
+            <div>
+              説明 :
+              この分野の問題がランダムに5問表示されます。対戦相手と正解数を競おう
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contents">
+        {% for quiz in quizzes %}
+        <div class="card mt-3">
+          <div class="card-body">
+            <div class="content option">{{ quiz.category }}</div>
+            <h3 class="title">{{ quiz.title }}</h3>
+            <button class="btn btn-primary float-end">
+              <a href="{% url 'answerquiz' quiz.id %}">入室</a>
+            </button>
+            <div class="description">説明 : {{ quiz.description }}</div>
+          </div>
+        </div>
+        {% empty %}
+        <p>該当するクイズがありません。</p>
+        {% endfor %}
+      </div>
+
+      <!-- <div class="row">
         <aside class="col-md-3">
           <div class="sidebar bg-light p-3 shadow-sm rounded">
             <h5 class="text-center mb-3">カテゴリ</h5>
@@ -51,7 +133,6 @@
           </div>
         </aside>
 
-        <!-- Contents -->
         <main class="col-md-9">
           <div class="row">
             {% for quiz in quiz_result %}
@@ -68,7 +149,7 @@
             {% endfor %}
           </div>
         </main>
-      </div>
+      </div> -->
 
       <!-- Footer -->
       <footer class="mt-4 bg-light text-center p-3 shadow-sm">

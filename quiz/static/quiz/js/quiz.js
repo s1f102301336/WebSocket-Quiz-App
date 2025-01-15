@@ -28,6 +28,8 @@ const btns = [correct, incorrect1, incorrect2, incorrect3];
 const result = document.getElementById("result");
 
 const judge = (id) => {
+  console.log("You clicked", id);
+
   if (id === "correct_answer") {
     result.textContent = "正解";
   } else {

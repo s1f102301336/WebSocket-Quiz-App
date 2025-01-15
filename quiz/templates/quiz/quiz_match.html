@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'quiz/css/match.css' %}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <title>Quiz回答</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container-fluid d-flex justify-content-between">
+        <h1 style="font-size: 2vw">
+          対戦部屋 : <span id="quiz-category">{{ category }}</span>
+        </h1>
+        <div class="Logo-p">
+          <img src="{% static 'quiz/img/Logo2.jpg' %}" class="Logo py-3" />
+        </div>
+        <button class="btn home_button" style="background-color: #2de6eb">
+          <a href="{% url 'home' %}" style="text-decoration: none; color: white"
+            >ホームへ戻る</a
+          >
+        </button>
+      </div>
+    </nav>
+    <div class="quiz_container hidden">
+      <div class="quiz_info row d-flex justify-content-around">
+        <div class="col-4 p-5">
+          <div class="quiz_header">
+            <h1 id="quiz-title" style="font-size: 3vw"></h1>
+            <!-- クイズのタイトル -->
+            <p id="quiz-description"></p>
+            <!-- クイズの説明 -->
+          </div>
+        </div>
+        <div class="col-4 py-5">
+          <div
+            class="profile card"
+            style="
+              background-color: #54c3ff;
+              color: white;
+              width: 100%;
+              height: 100%;
+            "
+          >
+            <div class="card-body row">
+              <div class="my_info col-5 text-center">
+                <div class="myName align-self-start"></div>
+                <div id="my_judge" class="align-self-center fw-bold"></div>
+                <div id="my_score" class="align-self-end">0</div>
+              </div>
+              <div class="vs col-2">
+                <h3>vs</h3>
+              </div>
+              <div class="opp_info col-5 text-center">
+                <div class="oppName align-self-start"></div>
+                <div id="opp_judge" class="align-self-center fw-bold"></div>
+                <div id="opp_score" class="align-self-end">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4 py-5">
+          <div
+            class="card mx-5"
+            style="background-color: #54c3ff; color: white"
+          >
+            <div class="card-body center">
+              <div id="answer_count_p">
+                <p>回答終了まであと</p>
+                <div class="center">
+                  <span id="answer_count" style="font-weight: bold"></span
+                  ><span class="align-self-end">秒</span>
+                </div>
+              </div>
+              <div id="next_count_p">
+                <p>次の問題まであと</p>
+                <div class="center">
+                  <span id="next_count" style="font-weight: bold"></span
+                  ><span class="align-self-end">秒</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="match_back p-5">
+      <div class="container">
+        <div id="wait_container">
+          <div class="card" style="height: 100%">
+            <div class="card-body">
+              <h2>対戦相手を待っています...</h2>
+            </div>
+          </div>
+        </div>
+        <div id="pre_container" class="hidden">
+          <div class="card py-5" style="height: 100%">
+            <div class="card-body pre-text">
+              <h2>対戦相手が見つかりました！</h2>
+              <h2>あと<span id="start_count"></span>秒で開始します...</h2>
+              <div
+                class="profile card center mx-auto mt-5"
+                style="background-color: #54c3ff; color: white"
+              >
+                <h3 class="card-body row">
+                  <div class="myName col-5 center px-2"></div>
+                  <div class="vs col-2">vs</div>
+                  <div class="oppName col-5 center px-2"></div>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz_container hidden">
+          <div class="card p-3 shadow">
+            <div class="card-body">
+              <h2>問題</h2>
+              <h4 id="quiz-content" class="mt-1"></h4>
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="row g-3 m-5">
+              <div class="s_head col-6">
+                <button class="selection btn py-3" id="a"></button>
+              </div>
+              <div class="s_head col-6">
+                <button class="selection btn py-3" id="b"></button>
+              </div>
+              <div class="s_head col-6">
+                <button class="selection btn py-3" id="c"></button>
+              </div>
+              <div class="s_head col-6">
+                <button class="selection btn py-3" id="d"></button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div id="now_result" class="center" style="color: white">
+              <h2>回答</h2>
+              <p>自分の回答: <span id="my_answer"></span></p>
+              <p>相手の回答: <span id="opp_answer"></span></p>
+            </div>
+          </div>
+
+          <div class="hidden" id="explanation">
+            <div class="card p-3 mt-3 shadow">
+              <div class="card-body">
+                <div>正解：<span id="quiz-correct"></span></div>
+                <h2 class="mt-1">解説</h2>
+                <h4 id="quiz-explanation" class="mt-1"></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="result_container" class="hidden py-3">
+          <div class="card resutl_body">
+            <div class="card-body">
+              <h1 class="center">対戦結果</h1>
+
+              <table class="table col-12">
+                <tr>
+                  <th id="th_q">問題</th>
+                  <th><span class="myName"></span></th>
+                  <th><span class="oppName"></span></th>
+                </tr>
+                <tbody id="quiz_result"></tbody>
+              </table>
+
+              <h1 id="winner" class="center my-5" style="font-size: 4.5vw"></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const category = "{{ category|escapejs }}"; // テンプレートから受け取ったカテゴリをエスケープして安全にJavaScript変数へ
+      const DATA_URL = `/quiz/get_data/${category}/`; // URLを構築
+      console.log("Category:", category); // 確認用
+      console.log("DATA_URL:", DATA_URL); // 確認用
+    </script>
+
+    <script
+      type="text/javascript"
+      src="{% static 'quiz/js/match_ws.js' %}"
+    ></script>
+  </body>
+</html>
