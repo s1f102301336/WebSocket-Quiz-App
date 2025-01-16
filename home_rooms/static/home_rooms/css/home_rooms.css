@@ -24,9 +24,11 @@ body {
 .footer {
   width: 100%;
   text-align: center;
-  background-color: #039be5; /* 濃い青 */
+  background: url('/mnt/data/image.png') no-repeat center center; /* 画像を使用 */
+  background-size: cover;
   color: white;
-  padding: 10px 0;
+  padding: 20px 0;
+  border-bottom: 2px solid #039be5;
 }
 
 .card {
@@ -85,11 +87,12 @@ body {
   align-items: center;
   justify-content: center;
   height: 150px;
-  background-color: white;
+  background: url('/mnt/data/image.png') no-repeat center center; /* 画像を使用 */
+  background-size: cover;
+  color: white;
   border-radius: 10px;
   font-size: 24px;
   font-weight: bold;
-  color: #0288d1;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -124,7 +127,9 @@ body {
 /* ログイン画面 */
 .login-card {
   width: 300px;
-  background-color: white;
+  background: url('/mnt/data/image.png') no-repeat center center; /* 画像を使用 */
+  background-size: cover;
+  color: white;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -155,3 +160,4 @@ body {
 .login-card button:hover {
   background-color: #0277bd;
 }
+
