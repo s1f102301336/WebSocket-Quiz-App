@@ -39,8 +39,8 @@ header {
 header .navbar-brand {
   font-size: 24px;
   font-weight: bold;
-  text-shadow: 1px 1px #1565c0;
-  color: #fff;
+  color: #776868;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* 文字に影を追加 */
 }
 
 /* フォーム部分 */
@@ -140,12 +140,25 @@ a.btn-outline-danger {
 
 /* フッター */
 footer {
-  background: #e3f2fd; /* 明るいブルーのフッター */
-  color: #333;
+  background: linear-gradient(45deg, #ff4943, #ffa407); /* 赤から黄色のグラデーション */
+  color: #fff; /* テキストは白で視認性を確保 */
   padding: 15px 0;
-  border-radius: 0 0 10px 10px;
-  margin-top: 20px;
+  border-radius: 10px; /* 柔らかい角を維持 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 軽い影を追加 */
 }
+
+footer p {
+  color: #fff; /* テキストは白で強調 */
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); /* 軽い影を追加 */
+  font-size: 14px;
+}
+
+footer p span {
+  color: #eb5c1f; /* 指し色に明るい黄色を使用 */
+}
+
+
 
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
