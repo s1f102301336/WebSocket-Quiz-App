@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <!-- {%load static%} -->
 <html lang="ja">
@@ -12,13 +13,35 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static 'home_rooms/css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'home_rooms/css/home_rooms.css' %}" />
     <link
       rel="stylesheet"
       href="{% static 'quiz_create/css/quiz_create.css' %}"
     />
   </head>
   <body>
-    <div class="container">
+    <div style="height: 300px;"><nav class="navbar">
+      <div class="container-fluid d-flex justify-content-between">
+        <div >
+          {% if user.is_authenticated %}
+            ログイン中: ユーザID - {{ user.username }}
+          {% else %}
+            ログインしていません
+          {% endif %}
+        </div>
+        <div class="Logo-p">
+          <img src="{% static 'quiz/img/Logo2.jpg' %}" class="Logo py-3" />
+        </div>
+        <button class="btn home_button" style="background-color: #2de6eb">
+          <a href="{% url 'home' %}" style="text-decoration: none; color: white"
+            >ホームへ戻る</a
+          >
+        </button>
+      </div>
+    </nav>
+    </div>
+    <div class="a">
+      <div class="container">
       <!-- Header -->
       <header class="mb-4">
         <nav
@@ -75,13 +98,7 @@
         <div></div>
       </div>
 
-      <div style="position: fixed; top: 0; left: 0; padding: 10px; background-color: #f0f0f0;">
-        {% if user.is_authenticated %}
-          ログイン中: ユーザID - {{ user.username }}
-        {% else %}
-          ログインしていません
-        {% endif %}
-      </div>
+      
     
     
       <div class="match_room">
