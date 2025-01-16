@@ -11,32 +11,31 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
-    
+
     <title>Quiz回答</title>
   </head>
   <body>
     <!-- ヘッダー -->
-     <div>
+    <div>
       <nav class="navbar">
         <div class="container-fluid d-flex justify-content-between">
-          <h1 style="font-size: 2vw">
-            一問一答 :
-          </h1>
+          <h1 style="font-size: 2vw">一問一答 :</h1>
           <div class="Logo-p">
             <img src="{% static 'quiz/img/Logo2.jpg' %}" class="Logo py-3" />
           </div>
           <button class="btn home_button" style="background-color: #2de6eb">
-            <a href="{% url 'home' %}" style="text-decoration: none; color: white"
+            <a
+              href="{% url 'home' %}"
+              style="text-decoration: none; color: white"
               >ホームへ戻る</a
             >
           </button>
         </div>
       </nav>
-     </div>
-    
+    </div>
 
     <!-- メインコンテンツ -->
-    <div class="container mt-4 p-4 rounded" style="background-color: #41B8FE">
+    <div class="container mt-4 p-4 rounded" style="background-color: #41b8fe">
       <!-- クイズ情報 -->
       <section class="text-center mb-4">
         <h2 class="quiz-title">{{ quiz.title }}</h2>
@@ -53,7 +52,11 @@
       <section class="text-center mb-4">
         <div class="quiz-options d-flex flex-wrap justify-content-center gap-2">
           {% for key, selection in selections.items %}
-          <button class="btn btn-outline-primary quiz-option" id="{{ key }}" value="{{ selection }}">
+          <button
+            class="btn btn-outline-primary quiz-option"
+            id="{{ key }}"
+            value="{{ selection }}"
+          >
             {{ selection }}
           </button>
           {% endfor %}
