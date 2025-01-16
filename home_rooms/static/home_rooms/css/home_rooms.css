@@ -1,137 +1,64 @@
-/* base.css */
-
 /* 全体のスタイル */
-body {
+.a {
   font-family: "Arial", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #4fc3f7; /* ベースカラー */
+  background: #90caf9; /* 明るいブルー背景 */
   color: #333;
-}
-
-/* コンテナ */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
-/* 共通スタイル */
-.header,
-.footer {
+/* コンテナスタイル */
+.container {
   width: 100%;
-  text-align: center;
-  background-color: #039be5; /* 濃い青 */
-  color: white;
-  padding: 10px 0;
-}
-
-.card {
-  background-color: white;
+  max-width: 600px;
+  background: #ffffff; /* 白色の背景 */
   border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: 300px;
-  margin: 10px 0;
 }
 
-/* 各セクション */
-.timer {
-  font-size: 2rem;
-  font-weight: bold;
-  background-color: #ffcc80; /* オレンジ */
-  padding: 10px 20px;
-  border-radius: 10px;
-  color: #333;
-}
-
-.question-box {
-  background-color: #e3f2fd; /* 明るい青 */
-  border: 2px solid #0288d1; /* ボーダー濃い青 */
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 18px;
+/* ヘッダー */
+header {
+  background: linear-gradient(
+    45deg,
+    #42a5f5,
+    #64b5f6
+  ); /* 薄い青系のグラデーション */
+  color: #fff;
+  padding: 15px 0;
+  border-radius: 10px 10px 0 0;
   margin-bottom: 20px;
 }
 
-.answer-box {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.answer-box button {
-  background-color: #29b6f6;
-  color: white;
-  border: none;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.answer-box button:hover {
-  background-color: #0288d1;
-}
-
-/* VS画面のスタイル */
-.vs-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 150px;
-  background-color: white;
-  border-radius: 10px;
+header .navbar-brand {
   font-size: 24px;
   font-weight: bold;
-  color: #0288d1;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px #1565c0;
+  color: #fff;
 }
 
-/* タイトル画面 */
-.title-card {
-  font-size: 1.5rem;
+/* フォーム部分 */
+form {
+  margin-top: 10px;
+}
+
+form label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 14px;
   font-weight: bold;
-  margin-bottom: 10px;
-  color: #0288d1;
+  color: #7e57c2; /* パープルのラベル */
 }
 
-.category-bar {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.category-bar div {
-  background-color: #e1f5fe;
-  padding: 10px 15px;
-  border-radius: 5px;
-  color: #333;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.category-bar div:hover {
-  background-color: #b3e5fc;
-}
-
-/* ログイン画面 */
-.login-card {
-  width: 300px;
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.login-card input {
+form select,
+form input[type="text"],
+form button {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -140,18 +67,102 @@ body {
   font-size: 14px;
 }
 
-.login-card button {
-  width: 100%;
-  background-color: #039be5;
-  color: white;
-  border: none;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
+form button {
+  background: linear-gradient(45deg, #64b5f6, #42a5f5); /* 淡い青色のボタン */
+  color: #fff;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s;
+  border: none;
 }
 
-.login-card button:hover {
-  background-color: #0277bd;
+form button:hover {
+  background: linear-gradient(
+    45deg,
+    #42a5f5,
+    #64b5f6
+  ); /* ホバー時も柔らかい青 */
+}
+
+/* ボタンスタイル */
+a.btn {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 10px 5px;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 14px;
+  background: linear-gradient(45deg, #64b5f6, #42a5f5); /* 淡い青系のボタン */
+}
+
+a.btn-success {
+  background: #66bb6a;
+}
+
+a.btn-outline-secondary {
+  background: #bdbdbd;
+}
+
+a.btn-outline-danger {
+  background: #ef5350;
+  color: #fff;
+}
+
+/* カード */
+.card {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background: linear-gradient(
+    45deg,
+    #64b5f6,
+    #42a5f5
+  ); /* 薄い青系グラデーション */
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  color: #fff;
+}
+
+.card .description {
+  font-size: 14px;
+  color: #555;
+}
+
+/* フッター */
+footer {
+  background: #e3f2fd; /* 明るいブルーのフッター */
+  color: #333;
+  padding: 15px 0;
+  border-radius: 0 0 10px 10px;
+  margin-top: 20px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  header .navbar-brand {
+    font-size: 18px;
+  }
+
+  form label {
+    font-size: 12px;
+  }
+
+  form button,
+  a.btn {
+    font-size: 12px;
+  }
 }
