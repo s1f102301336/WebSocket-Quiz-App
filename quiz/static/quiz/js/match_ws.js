@@ -359,5 +359,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // 最初のクイズを表示
-  } catch (error) {}
+  } catch (error) {
+    console.error("クイズデータの取得に失敗しました:", error);
+  }
 });
