@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // WebSocket 設定
     const chatSocket = new WebSocket(
-      "ws://" +
+      "wss://" +
         window.location.host +
         "/ws/match/" +
         quizzes[currentQuizIndex].category +
